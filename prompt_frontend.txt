@@ -1,0 +1,1 @@
+@ScoreboardAPI.md write a simple but cool looking frontend (one single index.html) that showcases this scoreboard. on top make an area for the 3 functions/api routes and below show the whole leaderboard - automatically updated when new entry done.
