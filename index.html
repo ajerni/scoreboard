@@ -189,6 +189,17 @@
             font-weight: normal;
         }
 
+        .leaderboard-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .leaderboard-table-wrapper {
+                overflow-x: visible;
+            }
+        }
+
         .leaderboard-table {
             width: 100%;
             border-collapse: collapse;
@@ -307,21 +318,219 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .header h1 {
                 font-size: 2em;
             }
 
+            .header p {
+                font-size: 1em;
+            }
+
+            .controls {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            .controls h2 {
+                font-size: 1.3em;
+            }
+
             .control-group {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .control-card {
+                padding: 15px;
+            }
+
+            .control-card h3 {
+                font-size: 1.1em;
+            }
+
+            .form-group input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 14px 20px;
+                font-size: 0.95em;
+            }
+
+            .leaderboard {
+                padding: 20px 15px;
+            }
+
+            .leaderboard h2 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                font-size: 1.3em;
+            }
+
+            .refresh-indicator {
+                font-size: 0.75em;
+            }
+
+            .leaderboard-table-wrapper {
+                overflow-x: visible;
             }
 
             .leaderboard-table {
-                font-size: 0.9em;
+                font-size: 0.85em;
+                width: 100%;
+                table-layout: fixed;
             }
 
             .leaderboard-table th,
             .leaderboard-table td {
-                padding: 10px;
+                padding: 10px 6px;
+            }
+
+            .leaderboard-table th:nth-child(1),
+            .leaderboard-table td:nth-child(1) {
+                width: 15%;
+                text-align: center;
+            }
+
+            .leaderboard-table th:nth-child(2),
+            .leaderboard-table td:nth-child(2) {
+                width: 35%;
+            }
+
+            .leaderboard-table th:nth-child(3),
+            .leaderboard-table td:nth-child(3) {
+                width: 25%;
+                text-align: right;
+            }
+
+            .leaderboard-table th:nth-child(4),
+            .leaderboard-table td:nth-child(4) {
+                width: 25%;
+            }
+
+            .rank-badge {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 0.95em;
+            }
+
+            .score {
+                font-size: 1em;
+                white-space: nowrap;
+            }
+
+            .timestamp {
+                font-size: 0.75em;
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .player-name {
+                word-break: break-word;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .message {
+                font-size: 0.85em;
+                padding: 8px;
+            }
+
+            .empty-state {
+                padding: 40px 15px;
+            }
+
+            .empty-state svg {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+                margin-bottom: 5px;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+
+            .controls {
+                padding: 15px 10px;
+            }
+
+            .controls h2 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            .control-card {
+                padding: 12px;
+            }
+
+            .leaderboard {
+                padding: 15px 10px;
+            }
+
+            .leaderboard h2 {
+                font-size: 1.2em;
+            }
+
+            .leaderboard-table {
+                font-size: 0.75em;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 8px 4px;
+            }
+
+            .leaderboard-table th:nth-child(1),
+            .leaderboard-table td:nth-child(1) {
+                width: 12%;
+                text-align: center;
+            }
+
+            .leaderboard-table th:nth-child(2),
+            .leaderboard-table td:nth-child(2) {
+                width: 38%;
+            }
+
+            .leaderboard-table th:nth-child(3),
+            .leaderboard-table td:nth-child(3) {
+                width: 25%;
+                text-align: right;
+            }
+
+            .leaderboard-table th:nth-child(4),
+            .leaderboard-table td:nth-child(4) {
+                width: 25%;
+            }
+
+            .rank-badge {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 0.9em;
+            }
+
+            .player-name {
+                max-width: 100px;
             }
         }
     </style>
@@ -485,23 +694,37 @@
             }
 
             let html = `
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Player</th>
-                            <th>Score</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="leaderboard-table-wrapper">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Score</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
             `;
 
+            const isMobile = window.innerWidth <= 768;
+            
             scores.forEach((entry, index) => {
                 const rankClass = entry.rank === 1 ? 'rank-1' : 
                                  entry.rank === 2 ? 'rank-2' : 
                                  entry.rank === 3 ? 'rank-3' : 'rank-other';
-                const date = new Date(entry.created_at).toLocaleString();
+                
+                let date;
+                if (isMobile) {
+                    // Short format for mobile: DD.MM.YY
+                    const d = new Date(entry.created_at);
+                    const day = String(d.getDate()).padStart(2, '0');
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const year = String(d.getFullYear()).slice(-2);
+                    date = `${day}.${month}.${year}`;
+                } else {
+                    date = new Date(entry.created_at).toLocaleString();
+                }
                 
                 html += `
                     <tr>
@@ -516,8 +739,9 @@
             });
 
             html += `
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             `;
 
             contentEl.innerHTML = html;

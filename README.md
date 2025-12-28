@@ -3,6 +3,7 @@
 A modern, real-time leaderboard system built with Rust (Actix-web), PostgreSQL 16, and a beautiful HTML frontend. Features automatic top 10 ranking, real-time updates, and a RESTful API.
 
 See live demo at: [https://scoreboard.andierni.ch](https://scoreboard.andierni.ch)
+Backend served at: [https://statustracker.ernilabs.com](https://statustracker.ernilabs.com)
 
 ## 🏗️ Architecture
 
